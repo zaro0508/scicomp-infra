@@ -1,0 +1,58 @@
+Description: Synapse External S3 Bucket
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  AllowWriteBucket:
+    Type: String
+    Description: true for read-write, false (default) for read-only bucket
+    AllowedValues:
+      - true
+      - false
+    Default: false
+  SynapseUserName:
+    Type: String
+    Description: Synapse user for read-write bucket
+Conditions:
+  AllowWrite: !Equals [!Ref AllowWriteBucket, true]
+Resources:
+  SynapseExternalBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      CorsConfiguration:
+        CorsRules:
+          - Id: SynapseCORSRule
+            AllowedHeaders: ['*']
+            AllowedOrigins: ['*']
+            AllowedMethods: [GET, POST, PUT, HEAD]
+            MaxAge: '3000'
+  ExternalBucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref SynapseExternalBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Sid: "ReadAccess"
+            Effect: "Allow"
+            Principal:
+              AWS: "325565585839"
+            Action: "s3:ListBucket"
+            Resource: !GetAtt SynapseExternalBucket.Arn
+          -
+            Sid: "WriteAccess"
+            Effect: "Allow"
+            Principal:
+              AWS: "325565585839"
+            Action:
+              - !If [AllowWrite, "s3:*GetObject*", "s3:GetObject*"]
+              - "s3:*MultipartUpload*"
+            Resource: !Sub ${SynapseExternalBucket.Arn}/*
+Outputs:
+  SynapseExternalBucket:
+    Value: !Ref SynapseExternalBucket
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-SynapseExternalBucket'
+  SynapseUserName:
+    Value: !Ref SynapseUserName
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-SynapseUserName'
