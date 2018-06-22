@@ -1,0 +1,8 @@
+template_path: templates/SynapseExternalBucket.yaml
+stack_name: GatesKI-TestStudy
+parameters:
+  AllowWriteBucket: "true"
+  SynapseUserName: "khai"
+hooks:
+  after_create:
+    - !cmd auto-provision/SynapseExternalBucketHelper.sh GatesKI-TestStudy
