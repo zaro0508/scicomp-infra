@@ -13,5 +13,5 @@ aws s3 cp owner.txt s3://$SYNAPSE_BUCKET_NAME/
 # Send email to the bucket owner
 COMMITTER_EMAIL="$(git log -2 $TRAVIS_COMMIT --pretty="%cE"|grep -v -m1 noreply@github.com)"
 aws ses send-email --to "$COMMITTER_EMAIL" --subject "Scicomp Automated Provisioning" \
---text "A S3 bucket has been provisioned on your behalf. The bucket name is $SYNAPSE_BUCKET_NAME" \
+--text "An S3 bucket has been provisioned on your behalf. The bucket name is $SYNAPSE_BUCKET_NAME" \
 --from "aws.scicomp@sagebase.org"
