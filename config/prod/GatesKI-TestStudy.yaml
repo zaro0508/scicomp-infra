@@ -3,20 +3,19 @@ template_path: templates/SynapseExternalBucket.yaml
 stack_name: GatesKI-TestStudy
 parameters:
   # true for read-write bucket, false (default) for read-only bucket 
-  AllowWriteBucket: "true"
+  AllowWriteBucket: 'true'
   # Synapse username
-  SynapseUserName: "jsmith"
+  SynapseUserName: 'jsmith'
   # true to encrypt bucket, false (default) for no encryption
-  EncryptBucket: "true"
+  EncryptBucket: 'true'
   # Bucket owner's email address
-  OwnerEmail: joe.smith@sagebase.org
+  OwnerEmail: 'joe.smith@sagebase.org'
   # true to enable a Glacier life cycle rule, false (default)
-  EnableGlacierLifeCycle: true
-  # Number of days until S3 objects are replicated to Glacier, default is 30
-  GlacierTransition: 14
-  # Number of days (from creation) when objects are deleted from S3 and Glacier, default is 365
-  GlacierExpiration: 720
+  EnableGlacierLifeCycle: 'true'
+  # Number of days until S3 objects are replicated to Glacier, default is 30 days
+  GlacierTransition: '14'
+  # Number of days (from creation) when objects are deleted from S3 and Glacier, default is 365000 days
+  GlacierExpiration: '720'
 hooks:
   after_create:
     - !synapse_external_bucket
-
