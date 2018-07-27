@@ -10,6 +10,12 @@ parameters:
   EncryptBucket: "true"
   # Bucket owner's email address
   OwnerEmail: joe.smith@sagebase.org
+  # true to enable a Glacier life cycle rule, false (default)
+  EnableGlacierLifeCycle: true
+  # Number of days until S3 objects are replicated to Glacier, default is 30
+  GlacierTransition: 14
+  # Number of days (from creation) when objects are deleted from S3 and Glacier, default is 365
+  GlacierExpiration: 720
 hooks:
   after_create:
     - !synapse_external_bucket
