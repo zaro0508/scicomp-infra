@@ -13,3 +13,6 @@ parameters:
 hooks:
   after_create:
     - !synapse_external_bucket
+    - !synapse_external_bucket_email_owner
+  after_update:
+    - !synapse_external_bucket
