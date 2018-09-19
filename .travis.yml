@@ -14,5 +14,4 @@ install:
 script:
 - ./validate-templates.sh || travis_terminate 1
 - sceptre --var "profile=default" --var "region=us-east-1" launch-env prod
-- pushd auto-provision && ./create_cf_stack.sh && popd || travis_terminate 1
 
