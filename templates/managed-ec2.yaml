@@ -485,7 +485,7 @@ Resources:
           Value: !Ref OwnerEmail
     CreationPolicy:
       ResourceSignal:
-        Timeout: PT5M
+        Timeout: PT10M
 Outputs:
   Ec2InstanceId:
     Value: !Ref Ec2Instance
