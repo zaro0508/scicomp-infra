@@ -12,6 +12,9 @@ parameters:
   OwnerEmail: "yooree.chae@sagebase.org"
   # EC2 instance type (available types https://aws.amazon.com/ec2/instance-types/)
   InstanceType: "t2.nano"
+  # Name of an existing EC2 KeyPair to enable SSH access to the instance
+  KeyName: "amp-emory"
+
    # Integration with our jumpcloud directory service (do not change)
   JcConnectKey: !ssm /infra/JcConnectKey
   JcServiceApiKey: !ssm /infra/JcServiceApiKey
