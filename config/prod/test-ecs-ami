@@ -1,0 +1,24 @@
+# Provision an EC2 instance
+template_path: templates/managed-ec2.yaml
+stack_name: test-ecs-ami
+dependencies:
+  - peer-vpn-computevpc
+parameters:
+  # The Sage deparment for this resource
+  Department: "Platform"
+  # The Sage project this resource will be used for
+  Project: "Infrastructure"
+  # The resource owner
+  OwnerEmail: "khai.do@sagebase.org"
+  # EC2 instance type (available types https://aws.amazon.com/ec2/instance-types/)
+  InstanceType: "t2.medium"
+  # Docker optimized ami https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+  AMIId: "ami-0b9a214f40c38d5eb"
+
+  # Integrate with our cloud directory service (do not change)
+  JcConnectKey: !ssm /infra/JcConnectKey
+  JcServiceApiKey: !ssm /infra/JcServiceApiKey
+  JcSystemsGroupId: !ssm /infra/JcSystemsGroupId
+hooks:
+  after_update:
+    - !notify_ec2
