@@ -477,6 +477,8 @@ Resources:
             - !Ref 'AWS::Region'
             - |+
       Tags:
+        - Key: "Name"
+          Value: !Ref 'AWS::StackName'
         - Key: "Department"
           Value: !Ref Department
         - Key: "Project"
