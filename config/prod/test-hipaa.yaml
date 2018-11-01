@@ -12,7 +12,7 @@ parameters:
   OwnerEmail: "thomas.yu@sagebionetworks.org"
   # EC2 instance type (available types https://aws.amazon.com/ec2/instance-types/)
   InstanceType: "t2.small"
-  AMIId: "ami-03cfba010209eb202"
+  AMIId: "ami-0ddee041772c2d9f8"
 
   # Integration with our jumpcloud directory service (do not change)
   JcConnectKey: !ssm /infra/JcConnectKey
