@@ -128,6 +128,10 @@ Mappings:
       Arch: HVM64
     t2.large:
       Arch: HVM64
+    t2.xlarge:
+      Arch: HVM64
+    t2.2xlarge:
+      Arch: HVM64
     m1.small:
       Arch: PV64
     m1.medium:
@@ -234,6 +238,10 @@ Mappings:
     t2.medium:
       Arch: NATHVM64
     t2.large:
+      Arch: NATHVM64
+    t2.xlarge:
+      Arch: NATHVM64
+    t2.2xlarge:
       Arch: NATHVM64
     m1.small:
       Arch: NATPV64
