@@ -32,6 +32,17 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
+  AWSIAMBruceHoffUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: bruce.hoff@sagebase.org
+      Groups:
+        - !Ref AWSIAMAllUsersGroup
+        - !Ref AWSIAMDeveloperUsersGroup
+        - !Ref AWSIAMBillingManagersGroup
+      LoginProfile:
+        Password: !Ref InitNewUserPassword
+        PasswordResetRequired: true
   AWSIAMThomasYuUser:
     Type: 'AWS::IAM::User'
     Properties:
