@@ -1,0 +1,10 @@
+template_path: remote-templates/GuardDutyMember.yaml
+stack_name: guardduty-member
+dependencies:
+  - essentials
+parameters:
+  MasterAccountId: !ssm /infra/SecuritycentralAwsAccountId
+  InvitationId: b8b3d07074f4b54d579c4927a4b5f78e
+hooks:
+  before_update:
+    - !cmd "curl https://raw.githubusercontent.com/Sage-Bionetworks/aws-infra/master/templates/GuardDutyMember.yaml --create-dirs -o remote-templates/GuardDutyMember.yaml"
