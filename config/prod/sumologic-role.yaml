@@ -1,0 +1,11 @@
+template_path: remote-templates/sumologic-role.yaml
+stack_name: sumologic-role
+dependencies:
+  - essentials
+parameters:
+  ExternalID: !ssm /infra/SumologicExternalID
+  Actions: 's3:GetObject,s3:GetObjectVersion,s3:ListBucketVersions,s3:ListBucket'
+  Resource: !ssm /infra/BeanstalkBucketArn
+hooks:
+  before_update:
+    - !cmd "curl https://raw.githubusercontent.com/Sage-Bionetworks/aws-infra/master/templates/sumologic-role.yaml --create-dirs -o remote-templates/sumologic-role.yaml"
