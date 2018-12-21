@@ -13,5 +13,7 @@ install:
 - ./setup_sceptre.sh || travis_terminate 1
 script:
 - ./validate-templates.sh || travis_terminate 1
+# update cloudformation templates
 - sceptre --var "profile=default" --var "region=us-east-1" launch-env prod
-
+# update SAM templates
+- echo 'y'|sceptre --var "profile=default" --var "region=us-east-1" update-stack-cs prod rotate-credentials
