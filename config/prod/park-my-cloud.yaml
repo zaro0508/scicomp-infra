@@ -1,0 +1,9 @@
+template_path: remote-templates/ParkMyCloud.yaml
+stack_name: park-my-cloud
+dependencies:
+  - bootstrap
+parameters:
+  PMCExternalID: !ssm /infra/PMCExternalID
+hooks:
+  before_update:
+    - !cmd "curl https://raw.githubusercontent.com/Sage-Bionetworks/aws-infra/master/templates/ParkMyCloud.yaml --create-dirs -o remote-templates/ParkMyCloud.yaml"
