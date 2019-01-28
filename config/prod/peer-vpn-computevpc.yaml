@@ -1,4 +1,4 @@
-template_path: remote-templates/peer-route-config.yaml
+template_path: remote/peer-route-config.yaml
 stack_name: peer-vpn-computevpc
 parameters:
   PeeringConnectionId: pcx-7e3bec16
@@ -7,4 +7,4 @@ parameters:
   VpnCidr: 10.1.0.0/16
 hooks:
   before_update:
-    - !cmd "curl https://raw.githubusercontent.com/Sage-Bionetworks/aws-infra/master/templates/peer-route-config.yaml --create-dirs -o remote-templates/peer-route-config.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/peer-route-config.yaml --create-dirs -o templates/remote/peer-route-config.yaml"

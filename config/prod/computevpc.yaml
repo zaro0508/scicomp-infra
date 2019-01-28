@@ -1,8 +1,8 @@
-template_path: remote-templates/vpc.yaml
+template_path: remote/vpc.yaml
 stack_name: computevpc
 parameters:
   VpcSubnetPrefix: "10.5"
   VpcName: computevpc
 hooks:
   before_update:
-    - !cmd "curl https://raw.githubusercontent.com/Sage-Bionetworks/aws-infra/master/templates/vpc.yaml --create-dirs -o remote-templates/vpc.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/vpc.yaml --create-dirs -o templates/remote/vpc.yaml"
