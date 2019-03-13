@@ -53,15 +53,6 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
-  AWSIAMJamesEddyUser:
-    Type: 'AWS::IAM::User'
-    Properties:
-      UserName: james.eddy@sagebase.org
-      Groups:
-        - !Ref AWSIAMAllUsersGroup
-      LoginProfile:
-        Password: !Ref InitNewUserPassword
-        PasswordResetRequired: true
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
