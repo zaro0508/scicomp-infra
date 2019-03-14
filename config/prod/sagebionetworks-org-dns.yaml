@@ -1,0 +1,16 @@
+template_path: remote/R53-HostedZone.yaml
+stack_name: sagebionetworks-org-dns
+parameters:
+  # The Sage deparment (Platform, CompOnc, SysBio, Governance, etc..)
+  Department: "Platform"
+  # The Sage project (Infrastructure, amp-ad, ntap, dream, etc..)
+  Project: "Infrastructure"
+  # The resource owner
+  OwnerEmail: 'khai.do@sagebase.org'
+  # The domain name (i.e. acme.org)
+  DnsDomainName: "sagebionetworks.org"
+hooks:
+  before_create:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/R53-HostedZone.yaml --create-dirs -o templates/remote/R53-HostedZone.yaml"
+  before_update:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/R53-HostedZone.yaml --create-dirs -o templates/remote/R53-HostedZone.yaml"
