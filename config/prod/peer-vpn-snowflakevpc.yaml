@@ -1,0 +1,10 @@
+template_path: remote/peer-route-config.yaml
+stack_name: peer-vpn-snowflakevpc
+parameters:
+  PeeringConnectionId: 
+  VpcPrivateRouteTable: rtb-01e3641c8ed3c91c6
+  VpcPublicRouteTable: rtb-020046b1a7632fb61
+  VpnCidr: 10.1.0.0/16
+hooks:
+  before_update:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/peer-route-config.yaml --create-dirs -o templates/remote/peer-route-config.yaml"
