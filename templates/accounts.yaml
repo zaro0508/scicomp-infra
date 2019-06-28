@@ -59,7 +59,6 @@ Resources:
       UserName: tess.thyer@sagebase.org
       Groups:
         - !Ref AWSIAMAllUsersGroup
-        - !Ref AWSIAMDeveloperUsersGroup
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -94,7 +93,6 @@ Resources:
                 - !GetAtt AWSIAMXavierSchildwachterUser.Arn
                 - !GetAtt AWSIAMKhaiDoUser.Arn
                 - !GetAtt AWSIAMAaronHaydenUser.Arn
-                - !GetAtt AWSIAMTessThyer.Arn
             Action:
               - "sts:AssumeRole"
       Path: "/"
