@@ -99,6 +99,7 @@ Resources:
         - Effect: Allow
           Action:
           - iam:PassRole
+          - sts:AssumeRole
           Resource:
           - arn:aws:iam::*:role/AWSBatchServiceRole
           - arn:aws:iam::*:role/ecsInstanceRole
@@ -108,8 +109,6 @@ Resources:
           Principal:
             AWS:
               - !GetAtt AWSIAMThomasYuUser.Arn
-          Action:
-            - "sts:AssumeRole"
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
