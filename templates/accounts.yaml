@@ -73,8 +73,8 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
-  AWSBatchAdmin:
-    Type: 'AWS::IAM::User'
+  AWSGenieBatchAdmin:
+    Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
@@ -95,13 +95,15 @@ Resources:
           - logs:FilterLogEvents
           - iam:ListInstanceProfiles
           - iam:ListRoles
-          Resource: "*"
+          Resource:
+          - genie-job-*
         - Effect: Allow
           Action:
           - iam:PassRole
           - sts:AssumeRole
           Resource:
           - arn:aws:iam::*:role/AWSBatchServiceRole
+          - arn:aws:iam::*:role/AWSLambdaBasicExecutionRole
           - arn:aws:iam::*:role/ecsInstanceRole
           - arn:aws:iam::*:role/iaws-ec2-spot-fleet-role
           - arn:aws:iam::*:role/aws-ec2-spot-fleet-role
