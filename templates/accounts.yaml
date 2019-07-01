@@ -72,44 +72,6 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
-  AWSGenieBatchAdmin:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - batch:*
-          - cloudwatch:GetMetricStatistics
-          - ec2:DescribeSubnets
-          - ec2:DescribeSecurityGroups
-          - ec2:DescribeKeyPairs
-          - ecs:DescribeClusters
-          - ecs:Describe*
-          - ecs:List*
-          - logs:Describe*
-          - logs:Get*
-          - logs:TestMetricFilter
-          - logs:FilterLogEvents
-          - iam:ListInstanceProfiles
-          - iam:ListRoles
-          Resource:
-          - genie-job-*
-        - Effect: Allow
-          Action:
-          - iam:PassRole
-          - sts:AssumeRole
-          Resource:
-          - arn:aws:iam::*:role/AWSBatchServiceRole
-          - arn:aws:iam::*:role/AWSLambdaBasicExecutionRole
-          - arn:aws:iam::*:role/ecsInstanceRole
-          - arn:aws:iam::*:role/iaws-ec2-spot-fleet-role
-          - arn:aws:iam::*:role/aws-ec2-spot-fleet-role
-          - arn:aws:iam::*:role/AWSBatchJobRole*
-          Principal:
-            AWS:
-              - !GetAtt AWSIAMThomasYuUser.Arn
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
