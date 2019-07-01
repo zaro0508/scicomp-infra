@@ -49,7 +49,6 @@ Resources:
       UserName: thomas.yu@sagebase.org
       Groups:
         - !Ref AWSIAMAllUsersGroup
-        - !Ref AWSIAMDeveloperUsersGroup
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
