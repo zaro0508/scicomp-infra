@@ -50,6 +50,7 @@ Resources:
       Groups:
         - !Ref AWSIAMAllUsersGroup
         - !Ref AWSIAMBatchDeveloperUsersGroup
+        - !Ref AWSIAMScienceTeamLeadGroup
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -80,6 +81,11 @@ Resources:
         - arn:aws:iam::aws:policy/IAMReadOnlyAccess
         - !Ref AWSIAMDynamoDenyDeletePolicy
         - !Ref AWSIAMRdsDenyDeletePolicy
+  AWSIAMScienceTeamLeadGroup:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      ManagedPolicyArns:
+        - !Ref AWSIAMCreateAmiPolicy
   AWSIAMBatchDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -101,6 +107,20 @@ Resources:
             Action:
               - "sts:AssumeRole"
       Path: "/"
+  AWSIAMCreateAmiPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          -
+            Effect: Allow
+            Action:
+              - ec2:Describe*
+              - ec2:CreateSnapshot
+              - ec2:CreateImage
+              - ec2:DeregisterImage
+            Resource: "*"
   AWSIAMDynamoDenyDeletePolicy:
     Type: 'AWS::IAM::ManagedPolicy'
     Properties:
