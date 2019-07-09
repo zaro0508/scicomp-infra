@@ -60,6 +60,7 @@ Resources:
       UserName: tess.thyer@sagebase.org
       Groups:
         - !Ref AWSIAMAllUsersGroup
+        - !Ref AWSIAMResourceGroupsUsersGroup
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -187,6 +188,11 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/ReadOnlyAccess
         - !Ref AWSIAMEnforceMfaPolicy
+  AWSIAMResourceGroupsUsersGroup:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/ResourceGroupsandTagEditorFullAccess
   AWSIAMBillingManagersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
