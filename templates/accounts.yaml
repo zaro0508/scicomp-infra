@@ -188,6 +188,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/ReadOnlyAccess
         - !Ref AWSIAMEnforceMfaPolicy
+        - !Ref AWSViewReportsPolicy
   AWSIAMResourceGroupsUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -301,8 +302,25 @@ Resources:
             Condition:
               BoolIfExists:
                 'aws:MultiFactorAuthPresent': 'false'
+  # policy allows viewing cost and usage reports
+  AWSViewReportsPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AllowUserToViewUsage
+            Effect: Allow
+            Action:
+              - 'aws-portal:ViewUsage'
+              - 'aws-portal:ViewBilling'
+            Resource: '*'
 Outputs:
   AWSIAMEnforceMfaPolicy:
     Value: !Ref AWSIAMEnforceMfaPolicy
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-EnforceMfaPolicy'
+  AWSViewReportsPolicy:
+    Value: !Ref AWSViewReportsPolicy
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ViewReportsPolicy'
