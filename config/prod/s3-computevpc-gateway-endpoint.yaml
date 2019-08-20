@@ -1,4 +1,4 @@
-template_path: gateway-vpc-endpoint.yaml
+template_path: remote/gateway-vpc-endpoint.yaml
 stack_name: s3-computevpc-gateway-vpc-endpoint
 dependencies:
   - prod/computevpc.yaml
