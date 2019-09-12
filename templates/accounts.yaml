@@ -189,6 +189,7 @@ Resources:
         - arn:aws:iam::aws:policy/ReadOnlyAccess
         - !Ref AWSIAMEnforceMfaPolicy
         - !Ref AWSViewReportsPolicy
+        - !Ref AWSSupportPolicy
   AWSIAMResourceGroupsUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -314,6 +315,18 @@ Resources:
             Action:
               - 'aws-portal:ViewUsage'
               - 'aws-portal:ViewBilling'
+            Resource: '*'
+  # policy allows viewing and filing support cases
+  AWSSupportPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AllowUserToViewAndFileSupportCases
+            Effect: Allow
+            Action:
+              - 'support:*'
             Resource: '*'
 Outputs:
   AWSIAMEnforceMfaPolicy:
