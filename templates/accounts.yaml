@@ -345,6 +345,7 @@ Resources:
               - ec2:CancelCapacityReservation
               - ec2:CreateCapacityReservation
               - ec2:DescribeCapacityReservations
+              - ec2:DescribeTags
               - ec2:GetCapacityReservationUsage
               - ec2:ModifyCapacityReservation
               - ec2:ModifyInstanceCapacityReservationAttributes
