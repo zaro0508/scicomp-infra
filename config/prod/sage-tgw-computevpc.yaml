@@ -1,0 +1,12 @@
+template_path: "remote/transit-gateway-attachment.yaml"
+stack_name: "sage-tgw-computevpc"
+dependencies:
+  - "prod/computevpc.yaml"
+parameters:
+  VpcName: "computevpc"
+  TransitGatewayId: 'tgw-08aa3c487e457374a'   # sage-tgw transit gateway
+hooks:
+  before_create:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/transit-gateway-attachment.yaml --create-dirs -o templates/remote/transit-gateway-attachment.yaml"
+  before_update:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/transit-gateway-attachment.yaml --create-dirs -o templates/remote/transit-gateway-attachment.yaml"
