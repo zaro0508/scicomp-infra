@@ -1,5 +1,5 @@
 template_path: "remote/cloudwatch-cross-account-sharing.yaml"
-stack_name: "cloudWatch-cross-account-sharing"
+stack_name: "cloudwatch-cross-account-sharing"
 parameters:
   MonitoringAccountIds:
     - "563295687221"  # org-sagebase-sandbox
