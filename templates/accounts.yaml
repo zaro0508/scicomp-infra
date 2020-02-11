@@ -359,3 +359,8 @@ Outputs:
     Value: !Ref AWSViewReportsPolicy
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ViewReportsPolicy'
+  AWSIAMAdminRoleArn:
+    Value: !GetAtt AWSIAMAdminRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-AdminRoleArn'
+
