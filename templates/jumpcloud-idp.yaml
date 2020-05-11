@@ -3,10 +3,10 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   ScicompAdminMetadata:
     Type: String
-    Description: "Public certificate for Jumpcloud sandbox-admin app"
+    Description: "Public certificate for Jumpcloud scicomp-admin app"
   ScicompDeveloperMetadata:
     Type: String
-    Description: "Public certificate for Jumpcloud sandbox-developer app"
+    Description: "Public certificate for Jumpcloud scicomp-developer app"
 Resources:
   ScicompAdminSamlProvider:
     Type: Custom::SAMLProvider
