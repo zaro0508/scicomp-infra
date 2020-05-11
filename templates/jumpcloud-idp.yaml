@@ -1,0 +1,77 @@
+Description: Resources for Jumpcloud IDP
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  ScicompAdminMetadata:
+    Type: String
+    Description: "Public certificate for Jumpcloud sandbox-admin app"
+  ScicompDeveloperMetadata:
+    Type: String
+    Description: "Public certificate for Jumpcloud sandbox-developer app"
+Resources:
+  ScicompAdminSamlProvider:
+    Type: Custom::SAMLProvider
+    Properties:
+      ServiceToken: !ImportValue
+        'Fn::Sub': '${AWS::Region}-cfn-cr-saml-provider-FunctionArn'
+      Name: "scicomp-admin"
+      Metadata: !Ref ScicompAdminMetadata
+      URL: ""
+  ScicompAdminSamlProviderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 28800
+      RoleName: !GetAtt ScicompAdminSamlProvider.Name
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref ScicompAdminSamlProvider
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+                "SAML:aud": "https://signin.aws.amazon.com/saml"
+  ScicompDeveloperSamlProvider:
+    Type: Custom::SAMLProvider
+    Properties:
+      ServiceToken: !ImportValue
+        'Fn::Sub': '${AWS::Region}-cfn-cr-saml-provider-FunctionArn'
+      Name: "scicomp-developer"
+      Metadata: !Ref ScicompDeveloperMetadata
+      URL: ""
+  ScicompDeveloperSamlProviderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 28800
+      RoleName: !GetAtt ScicompDeveloperSamlProvider.Name
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/PowerUserAccess
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref ScicompDeveloperSamlProvider
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+                "SAML:aud": "https://signin.aws.amazon.com/saml"
+Outputs:
+  ScicompAdminSamlProviderArn:
+    Value: !Ref ScicompAdminSamlProvider
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompAdminSamlProviderArn'
+  ScicompAdminSamlProviderRoleArn:
+    Value: !GetAtt ScicompAdminSamlProviderRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompAdminSamlProviderRoleArn'
+  ScicompDeveloperSamlProviderArn:
+    Value: !Ref ScicompDeveloperSamlProvider
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompDeveloperSamlProviderArn'
+  ScicompDeveloperSamlProviderRoleArn:
+    Value: !GetAtt ScicompDeveloperSamlProviderRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompDeveloperSamlProviderRoleArn'
