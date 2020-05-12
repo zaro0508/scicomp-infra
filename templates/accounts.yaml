@@ -363,4 +363,3 @@ Outputs:
     Value: !GetAtt AWSIAMAdminRole.Arn
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-AdminRoleArn'
-
