@@ -48,6 +48,8 @@ Resources:
       RoleName: !GetAtt ScicompDeveloperSamlProvider.Name
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/PowerUserAccess
+        - 'Fn::ImportValue': !Sub '${AWS::Region}-iam-policies-CapacityReservationPolicyArn'
+        - 'Fn::ImportValue': !Sub '${AWS::Region}-iam-policies-ViewReportsPolicyArn'
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:

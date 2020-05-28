@@ -9,3 +9,4 @@ parameters:
   ScicompDeveloperMetadata: !file_contents idp/jumpcloud/scicomp-developer.xml
 dependencies:
   - "prod/cfn-cr-saml-provider.yaml"
+  - "prod/iam-policies.yaml"
