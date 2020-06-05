@@ -7,6 +7,9 @@ Parameters:
   ScicompDeveloperMetadata:
     Type: String
     Description: "Public certificate for Jumpcloud scicomp-developer app"
+  ScicompViewerMetadata:
+    Type: String
+    Description: "Public certificate for Jumpcloud scicomp-viewer app"
 Resources:
   ScicompAdminSamlProvider:
     Type: Custom::SAMLProvider
@@ -60,6 +63,31 @@ Resources:
             Condition:
               StringEquals:
                 "SAML:aud": "https://signin.aws.amazon.com/saml"
+  ScicompViewerSamlProvider:
+    Type: Custom::SAMLProvider
+    Properties:
+      ServiceToken: !ImportValue
+        'Fn::Sub': '${AWS::Region}-cfn-cr-saml-provider-FunctionArn'
+      Name: "scicomp-viewer"
+      Metadata: !Ref ScicompViewerMetadata
+      URL: ""
+  ScicompViewerSamlProviderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 28800
+      RoleName: !GetAtt ScicompViewerSamlProvider.Name
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref ScicompViewerSamlProvider
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+                "SAML:aud": "https://signin.aws.amazon.com/saml"
 Outputs:
   ScicompAdminSamlProviderArn:
     Value: !Ref ScicompAdminSamlProvider
@@ -77,3 +105,11 @@ Outputs:
     Value: !GetAtt ScicompDeveloperSamlProviderRole.Arn
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompDeveloperSamlProviderRoleArn'
+  ScicompViewerSamlProviderArn:
+    Value: !Ref ScicompViewerSamlProvider
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompViewerSamlProviderArn'
+  ScicompViewerSamlProviderRoleArn:
+    Value: !GetAtt ScicompViewerSamlProviderRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScicompViewerSamlProviderRoleArn'

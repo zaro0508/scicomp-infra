@@ -7,6 +7,7 @@ stack_tags:
 parameters:
   ScicompAdminMetadata: !file_contents idp/jumpcloud/scicomp-admin.xml
   ScicompDeveloperMetadata: !file_contents idp/jumpcloud/scicomp-developer.xml
+  ScicompViewerMetadata: !file_contents idp/jumpcloud/scicomp-viewer.xml
 dependencies:
   - "prod/cfn-cr-saml-provider.yaml"
   - "prod/iam-policies.yaml"
