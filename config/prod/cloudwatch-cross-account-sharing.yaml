@@ -5,6 +5,6 @@ parameters:
     - "563295687221"  # org-sagebase-sandbox
 hooks:
   before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/cloudwatch-cross-account-sharing.yaml --create-dirs -o templates/remote/cloudwatch-cross-account-sharing.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/cloudwatch-cross-account-sharing.yaml --create-dirs -o templates/remote/cloudwatch-cross-account-sharing.yaml"
   before_update:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/cloudwatch-cross-account-sharing.yaml --create-dirs -o templates/remote/cloudwatch-cross-account-sharing.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/cloudwatch-cross-account-sharing.yaml --create-dirs -o templates/remote/cloudwatch-cross-account-sharing.yaml"
