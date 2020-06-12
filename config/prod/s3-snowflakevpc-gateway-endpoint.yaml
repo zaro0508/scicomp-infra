@@ -6,7 +6,5 @@ parameters:
   VpcName: snowflakevpc
   ServiceName: com.amazonaws.us-east-1.s3
 hooks:
-  before_create:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/gateway-vpc-endpoint.yaml --create-dirs -o templates/remote/gateway-vpc-endpoint.yaml"
-  before_update:
+  before_launch:
     - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/gateway-vpc-endpoint.yaml --create-dirs -o templates/remote/gateway-vpc-endpoint.yaml"
