@@ -78,6 +78,7 @@ Resources:
       RoleName: !GetAtt ScicompViewerSamlProvider.Name
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/ReadOnlyAccess
+        - arn:aws:iam::aws:policy/AmazonDocDBReadOnlyAccess
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
