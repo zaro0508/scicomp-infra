@@ -77,7 +77,7 @@ Resources:
       MaxSessionDuration: 28800
       RoleName: !GetAtt ScicompViewerSamlProvider.Name
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/ReadOnlyAccess
+        - arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
         - arn:aws:iam::aws:policy/AmazonDocDBReadOnlyAccess
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
