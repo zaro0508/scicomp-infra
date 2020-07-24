@@ -79,6 +79,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
         - arn:aws:iam::aws:policy/AmazonDocDBReadOnlyAccess
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkReadOnlyAccess
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
