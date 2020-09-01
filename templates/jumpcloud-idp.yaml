@@ -80,6 +80,7 @@ Resources:
         - arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
         - arn:aws:iam::aws:policy/AmazonDocDBReadOnlyAccess
         - arn:aws:iam::aws:policy/AWSElasticBeanstalkReadOnlyAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
