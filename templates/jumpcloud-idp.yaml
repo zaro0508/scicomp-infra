@@ -78,9 +78,11 @@ Resources:
       RoleName: !GetAtt ScicompViewerSamlProvider.Name
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
+        - arn:aws:iam::aws:policy/job-function/SupportUser
         - arn:aws:iam::aws:policy/AmazonDocDBReadOnlyAccess
         - arn:aws:iam::aws:policy/AWSElasticBeanstalkReadOnlyAccess
         - arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess
+        - arn:aws:iam::aws:policy/AWSLambdaReadOnlyAccess
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
